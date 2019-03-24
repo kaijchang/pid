@@ -13,24 +13,28 @@ derivative part - change in error between current error (et) and last error (et-
 exports = typeof(exports) == 'undefined' ? window : exports;
 
 exports.PID = function PID(kP, kI, kD) {
-    this.kP = kP || 0;
-    this.kI = kI || 0;
-    this.kD = kD || 0;
-
-    this.e = [];
-    this.t = 0;
+    this.updateGains = function (kP, kI, kD) {
+        this.kP = kP || 0;
+        this.kI = kI || 0;
+        this.kD = kD || 0;
+    };
 
     this.update = function (error) {
         error = error || 0;
 
-        this.e.push(error);
+        this.sumI += error;
 
-        const P = this.e[this.t] * this.kP;
-        const I = this.e.reduce((acc, cur) => cur + acc, 0) * this.kI;
-        const D = (this.e[this.t] - this.e[this.t - 1] || 0) * this.kD;
+        const P = error * this.kP;
+        const I = this.sumI * this.kI;
+        const D = (error - this.previousE) * this.kD;
 
-        this.t++;
+        this.previousE = error;
 
         return P + I + D;
-    }
+    };
+
+    this.updateGains(kP, kI, kD);
+
+    this.previousE = 0;
+    this.sumI = 0;
 };

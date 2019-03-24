@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@material/slider": "^1.0.0",
+    "p5": "^0.7.3"
+  }
+}

@@ -2,9 +2,108 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PID</title>
+    <title>PID Demo</title>
+    <style>
+        @font-face {
+            font-family: Azonix;
+            src: url("Azonix.otf") format("opentype");
+        }
+
+        body {
+            font-family: Azonix, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        #adjust-terms {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            position: fixed;
+            line-height: 48px;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .mdc-slider {
+            width: 25% !important;
+        }
+    </style>
+    <script src="node_modules/p5/lib/p5.min.js"></script>
+
+    <!-- Material Sliders -->
+    <script src="node_modules/@material/slider/dist/mdc.slider.min.js"></script>
+    <link rel="stylesheet" href="node_modules/@material/slider/dist/mdc.slider.min.css">
+
     <script src="pid.js"></script>
 </head>
 <body>
+    <h1>
+        PID Demo
+    </h1>
+    <span>
+        pick it up to move it
+    </span>
+    <div id="adjust-terms">
+        <span style="vertical-align: center;">P</span>
+        <div class="mdc-slider p-selector mdc-slider--discrete" tabindex="0" role="slider"
+             aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.1" data-step="0.1"
+             aria-label="Select P Value"
+        >
+            <div class="mdc-slider__track-container" style="background: white">
+                <div class="mdc-slider__track" style="background: white"></div>
+            </div>
+            <div class="mdc-slider__thumb-container">
+                <div class="mdc-slider__pin" style="background: black">
+                    <span class="mdc-slider__pin-value-marker" style="color: white;"></span>
+                </div>
+                <svg class="mdc-slider__thumb" width="21" height="21">
+                    <circle cx="10.5" cy="10.5" r="7.875" fill="gray" stroke="gray"></circle>
+                </svg>
+            </div>
+        </div>
+        <span>I</span>
+        <div class="mdc-slider i-selector mdc-slider--discrete" tabindex="0" role="slider"
+             aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.1" data-step="0.1"
+             aria-label="Select I Value"
+        >
+            <div class="mdc-slider__track-container" style="background: white">
+                <div class="mdc-slider__track" style="background: white"></div>
+            </div>
+            <div class="mdc-slider__thumb-container">
+                <div class="mdc-slider__pin" style="background: black">
+                    <span class="mdc-slider__pin-value-marker" style="color: white;"></span>
+                </div>
+                <svg class="mdc-slider__thumb" width="21" height="21">
+                    <circle cx="10.5" cy="10.5" r="7.875" fill="gray" stroke="gray"></circle>
+                </svg>
+            </div>
+        </div>
+        <span>D</span>
+        <div class="mdc-slider d-selector mdc-slider--discrete" tabindex="0" role="slider"
+             aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.1" data-step="0.1"
+             aria-label="Select D Value"
+        >
+            <div class="mdc-slider__track-container" style="background: white">
+                <div class="mdc-slider__track" style="background: white"></div>
+            </div>
+            <div class="mdc-slider__thumb-container">
+                <div class="mdc-slider__pin" style="background: black">
+                    <span class="mdc-slider__pin-value-marker" style="color: white;"></span>
+                </div>
+                <svg class="mdc-slider__thumb" width="21" height="21">
+                    <circle cx="10.5" cy="10.5" r="7.875" fill="gray" stroke="gray"></circle>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <script src="demo.js"></script>
 </body>
 </html>

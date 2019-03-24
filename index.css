@@ -1,0 +1,31 @@
+@font-face {
+    font-family: Azonix;
+    src: url("Azonix.otf") format("opentype");
+}
+
+body {
+    font-family: Azonix, sans-serif;
+    color: white;
+    text-align: center;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+#adjust-terms {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: fixed;
+    line-height: 48px;
+    width: 100%;
+    bottom: 0;
+}
+
+.mdc-slider {
+    width: 25% !important;
+}

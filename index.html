@@ -3,39 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>PID Demo</title>
-    <style>
-        @font-face {
-            font-family: Azonix;
-            src: url("Azonix.otf") format("opentype");
-        }
-
-        body {
-            font-family: Azonix, sans-serif;
-            color: white;
-            text-align: center;
-        }
-
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-
-        #adjust-terms {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            position: fixed;
-            line-height: 48px;
-            width: 100%;
-            bottom: 0;
-        }
-
-        .mdc-slider {
-            width: 25% !important;
-        }
-    </style>
     <script src="node_modules/p5/lib/p5.min.js"></script>
 
     <!-- Material Sliders -->
@@ -43,6 +10,7 @@
     <link rel="stylesheet" href="node_modules/@material/slider/dist/mdc.slider.min.css">
 
     <script src="pid.js"></script>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <h1>

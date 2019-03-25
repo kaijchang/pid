@@ -15,26 +15,29 @@ const PID = function PID(kP, kI, kD, maxI) {
         this.kP = kP || 0;
         this.kI = kI || 0;
         this.kD = kD || 0;
-        this.maxI = maxI || 1000;
+        this.maxI = maxI || 25;
     };
 
     this.update = function (error) {
         error = error || 0;
 
+        this.sumI += error;
+
         const P = error * this.kP;
         const I = this.sumI * this.kI;
         const D = (error - this.previousE) * this.kD;
 
-        this.sumI += I;
         if (this.sumI > this.maxI) {
-            this.sumI = maxI;
+            this.sumI = this.maxI;
         } else if (this.sumI < -this.maxI) {
-            this.sumI = -maxI;
+            this.sumI = -this.maxI;
         }
 
         this.previousE = error;
 
-        return P + I + D;
+        const output = P + I + D;
+
+        return { P, I, D, output };
     };
 
     this.updateGains(kP, kI, kD, maxI);

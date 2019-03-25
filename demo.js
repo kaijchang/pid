@@ -102,7 +102,7 @@ function PIDVehicle(pos, velocity, size, maxVelocity, turnRadius) {
 }
 
 function setup() {
-    createCanvas(windowWidth * 4 / 5, windowHeight);
+    createCanvas(windowWidth, windowHeight);
 
     vehicle = new PIDVehicle(createVector(0, height / 2), createVector(5, 0), 50, 5, 45);
 }
@@ -116,5 +116,5 @@ function draw() {
 }
 
 function windowResized() {
-    resizeCanvas(windowWidth * 4 / 5, windowHeight);
+    resizeCanvas(windowWidth, windowHeight);
 }

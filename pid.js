@@ -15,7 +15,7 @@ const PID = function PID(kP, kI, kD, maxI, interval) {
         this.kP = kP || 0;
         this.kI = kI || 0;
         this.kD = kD || 0;
-        this.maxI = maxI || 25;
+        this.maxI = maxI || 1000;
         this.interval = interval || 1 / 60;
     };
 

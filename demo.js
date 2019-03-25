@@ -1,6 +1,5 @@
 // patch material slider to allow float step in discrete sliders
-mdc.slider.MDCSliderFoundation.prototype.setStep =
-    eval(mdc.slider.MDCSliderFoundation.prototype.setStep.toSource().replace('||t<1', ''));
+mdc.slider.MDCSliderFoundation.prototype.setStep = function(t){if(t<0)throw new Error("Step cannot be set to a negative number");this.isDiscrete_&&("number"!=typeof t)&&(t=1),this.step_=t,this.setValue_(this.value_,!1,!0),this.setupTrackMarker()};
 
 let vehicle;
 

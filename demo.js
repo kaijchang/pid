@@ -8,14 +8,17 @@ const pSlider = new mdc.slider.MDCSlider(document.querySelector('.p-selector'));
 const iSlider = new mdc.slider.MDCSlider(document.querySelector('.i-selector'));
 const dSlider = new mdc.slider.MDCSlider(document.querySelector('.d-selector'));
 
-function PIDVehicle(pos, velocity, maxVelocity, size, turnRadius) {
+const velocitySlider = new mdc.slider.MDCSlider(document.querySelector('.velocity-selector'));
+const turnRadiusSlider = new mdc.slider.MDCSlider(document.querySelector('.turn-radius-selector'));
+
+function PIDVehicle(pos, velocity, size, maxVelocity, turnRadius) {
     this.pid = new PID();
     this.angle = 0;
 
     this.pos = pos;
     this.velocity = velocity;
-    this.maxVelocity = maxVelocity;
     this.size = size;
+    this.maxVelocity = maxVelocity;
     this.turnRadius = turnRadius;
 
     function truncate(value, max) {
@@ -37,6 +40,9 @@ function PIDVehicle(pos, velocity, maxVelocity, size, turnRadius) {
             this.pos.x = mouseX;
             this.pos.y = mouseY;
         } else {
+            this.maxVelocity = velocitySlider.value;
+            this.turnRadius = turnRadiusSlider.value;
+
             this.pid.updateGains(pSlider.value, iSlider.value, dSlider.value);
 
             const error = height / 2 - this.pos.y;
@@ -55,9 +61,9 @@ function PIDVehicle(pos, velocity, maxVelocity, size, turnRadius) {
             this.pos.add(this.velocity);
 
             if (this.pos.x - this.size / 2 >= width) {
-                this.pos.x = 0;
+                this.pos.x = -this.size / 2;
             } else if (this.pos.x + this.size / 2 <= 0) {
-                this.pos.x = width;
+                this.pos.x = width + size / 2;
             }
 
             if (this.pos.y >= height - this.size / 2) {
@@ -80,8 +86,6 @@ function PIDVehicle(pos, velocity, maxVelocity, size, turnRadius) {
         stroke(255);
         fill(255);
 
-        line(0, 0, 100, 0);
-
         rectMode(CENTER);
         rect(0, 0, this.size, this.size);
 
@@ -98,9 +102,9 @@ function PIDVehicle(pos, velocity, maxVelocity, size, turnRadius) {
 }
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(windowWidth * 4 / 5, windowHeight);
 
-    vehicle = new PIDVehicle(createVector(0, height / 2), createVector(1, 0), 1, 50, 45);
+    vehicle = new PIDVehicle(createVector(0, height / 2), createVector(5, 0), 50, 5, 45);
 }
 
 function draw() {

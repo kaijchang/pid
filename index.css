@@ -17,15 +17,18 @@ canvas {
 }
 
 #adjust-terms {
+    background: black;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     position: fixed;
-    line-height: 48px;
-    width: 100%;
-    bottom: 0;
+    height: 100%;
+    width: 20%;
+    left: 80%;
+    top: 0;
 }
 
 .mdc-slider {
-    width: 25% !important;
+    width: 80% !important;
+    align-self: center;
 }

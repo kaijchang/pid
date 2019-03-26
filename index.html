@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>PID Demo</title>
     <script src="node_modules/p5/lib/p5.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
 
     <script src="pid.js"></script>
     <link rel="stylesheet" href="index.css">
@@ -18,19 +19,19 @@
     <div id="adjust-terms">
         <span style="color: red">P</span>
         <input name="P" type="range" min="0" value="0.1" step="0.05" max="1">
-        <output name="P" style="color: red"></output>
+        <output name="P" style="color: red">0.1</output>
         <span style="color: green">I</span>
         <input name="I" type="range" min="0" value="0.1" step="0.05" max="1">
-        <output name="I" style="color: green"></output>
+        <output name="I" style="color: green">0.1</output>
         <span style="color: blue">D</span>
         <input name="D" type="range" min="0" value="0.1" step="0.05" max="1">
-        <output name="D" style="color: blue"></output>
+        <output name="D" style="color: blue">0.1</output>
         <span>Max Velocity</span>
         <input name="velocity" type="range" min="0" value="5" step="0.5" max="10">
-        <output name="velocity"></output>
+        <output name="velocity">5</output>
         <span>Max Turn Radius</span>
         <input name="turn-radius" type="range" min="0" value="45" step="5" max="180">
-        <output name="turn-radius"></output>
+        <output name="turn-radius">45</output>
     </div>
     <script src="demo.js"></script>
 </body>

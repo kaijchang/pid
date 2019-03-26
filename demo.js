@@ -1,19 +1,58 @@
-const pSlider = document.querySelector('input[name=P]');
-const iSlider = document.querySelector('input[name=I]');
-const dSlider = document.querySelector('input[name=D]');
+const pSlider = $('input[name=P]');
+const iSlider = $('input[name=I]');
+const dSlider = $('input[name=D]');
 
-const velocitySlider = document.querySelector('input[name=velocity]');
-const turnRadiusSlider = document.querySelector('input[name=turn-radius]');
+const velocitySlider = $('input[name=velocity]');
+const turnRadiusSlider = $('input[name=turn-radius]');
 
-const pOutput = document.querySelector('output[name=P]');
-const iOutput = document.querySelector('output[name=I]');
-const dOutput = document.querySelector('output[name=D]');
+const pOutput = $('output[name=P]');
+const iOutput = $('output[name=I]');
+const dOutput = $('output[name=D]');
 
-const velocityOutput = document.querySelector('output[name=velocity]');
-const turnRadiusOutput = document.querySelector('output[name=turn-radius]');
+const velocityOutput = $('output[name=velocity]');
+const turnRadiusOutput = $('output[name=turn-radius]');
+
+pSlider.val(pSlider.attr('value'));
+iSlider.val(iSlider.attr('value'));
+pSlider.val(dSlider.attr('value'));
+
+velocitySlider.val(velocitySlider.attr('value'));
+turnRadiusSlider.val(turnRadiusSlider.attr('value'));
+
+pOutput.text(pSlider.attr('value'));
+iOutput.text(iSlider.attr('value'));
+dOutput.text(dSlider.attr('value'));
+
+velocityOutput.text(velocitySlider.attr('value'));
+turnRadiusOutput.text(turnRadiusSlider.attr('value'));
+
+pSlider.on('input', event => {
+    vehicle.pid.updateGains(+$(event.target).val(), vehicle.pid.I, vehicle.pid.D);
+    pOutput.text($(event.target).val());
+});
+
+iSlider.on('input', event => {
+    vehicle.pid.updateGains(vehicle.pid.P, +$(event.target).val(), vehicle.pid.D);
+    iOutput.text($(event.target).val());
+});
+
+dSlider.on('input', event => {
+    vehicle.pid.updateGains(vehicle.pid.P, vehicle.pid.I, +$(event.target).val());
+    dOutput.text($(event.target).val());
+});
+
+velocitySlider.on('input', event => {
+    vehicle.maxVelocity = +$(event.target).val();
+    velocityOutput.text($(event.target).val());
+});
+
+turnRadiusSlider.on('input', event => {
+    vehicle.turnRadius = +$(event.target).val();
+    turnRadiusOutput.text($(event.target).val());
+});
 
 function PIDVehicle(pos, velocity, size, maxVelocity, turnRadius) {
-    this.pid = new PID();
+    this.pid = new PID(0.1, 0.1, 0.1);
     this.angle = 0;
 
     this.pos = pos;
@@ -41,11 +80,6 @@ function PIDVehicle(pos, velocity, size, maxVelocity, turnRadius) {
             this.pos.x = mouseX;
             this.pos.y = mouseY;
         } else {
-            this.maxVelocity = +velocitySlider.value;
-            this.turnRadius = +turnRadiusSlider.value;
-
-            this.pid.updateGains(+pSlider.value, +iSlider.value, +dSlider.value);
-
             const error = height / 2 - this.pos.y;
 
             this.result = this.pid.update(error);
@@ -115,13 +149,6 @@ function draw() {
 
     vehicle.update();
     vehicle.draw();
-
-    pOutput.textContent = pSlider.value;
-    iOutput.textContent = iSlider.value;
-    dOutput.textContent = dSlider.value;
-
-    velocityOutput.textContent = velocitySlider.value;
-    turnRadiusOutput.textContent = turnRadiusSlider.value;
 }
 
 function windowResized() {

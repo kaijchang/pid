@@ -5,10 +5,6 @@
     <title>PID Demo</title>
     <script src="node_modules/p5/lib/p5.min.js"></script>
 
-    <!-- Material Sliders -->
-    <script src="node_modules/@material/slider/dist/mdc.slider.min.js"></script>
-    <link rel="stylesheet" href="node_modules/@material/slider/dist/mdc.slider.min.css">
-
     <script src="pid.js"></script>
     <link rel="stylesheet" href="index.css">
 </head>
@@ -21,90 +17,20 @@
     </span>
     <div id="adjust-terms">
         <span style="color: red">P</span>
-        <div class="mdc-slider p-selector mdc-slider--discrete" tabindex="0" role="slider"
-             aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.1" data-step="0.05"
-             aria-label="Select P Value"
-        >
-            <div class="mdc-slider__track-container" style="background: white">
-                <div class="mdc-slider__track" style="background: white"></div>
-            </div>
-            <div class="mdc-slider__thumb-container">
-                <div class="mdc-slider__pin" style="background: black">
-                    <span class="mdc-slider__pin-value-marker" style="color: white;"></span>
-                </div>
-                <svg class="mdc-slider__thumb" width="21" height="21">
-                    <circle cx="10.5" cy="10.5" r="7.875" fill="gray" stroke="gray"></circle>
-                </svg>
-            </div>
-        </div>
+        <input name="P" type="range" min="0" value="0.1" step="0.05" max="1">
+        <output name="P" style="color: red"></output>
         <span style="color: green">I</span>
-        <div class="mdc-slider i-selector mdc-slider--discrete" tabindex="0" role="slider"
-             aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.1" data-step="0.05"
-             aria-label="Select I Value"
-        >
-            <div class="mdc-slider__track-container" style="background: white">
-                <div class="mdc-slider__track" style="background: white"></div>
-            </div>
-            <div class="mdc-slider__thumb-container">
-                <div class="mdc-slider__pin" style="background: black">
-                    <span class="mdc-slider__pin-value-marker" style="color: white;"></span>
-                </div>
-                <svg class="mdc-slider__thumb" width="21" height="21">
-                    <circle cx="10.5" cy="10.5" r="7.875" fill="gray" stroke="gray"></circle>
-                </svg>
-            </div>
-        </div>
+        <input name="I" type="range" min="0" value="0.1" step="0.05" max="1">
+        <output name="I" style="color: green"></output>
         <span style="color: blue">D</span>
-        <div class="mdc-slider d-selector mdc-slider--discrete" tabindex="0" role="slider"
-             aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.1" data-step="0.05"
-             aria-label="Select D Value"
-        >
-            <div class="mdc-slider__track-container" style="background: white">
-                <div class="mdc-slider__track" style="background: white"></div>
-            </div>
-            <div class="mdc-slider__thumb-container">
-                <div class="mdc-slider__pin" style="background: black">
-                    <span class="mdc-slider__pin-value-marker" style="color: white;"></span>
-                </div>
-                <svg class="mdc-slider__thumb" width="21" height="21">
-                    <circle cx="10.5" cy="10.5" r="7.875" fill="gray" stroke="gray"></circle>
-                </svg>
-            </div>
-        </div>
+        <input name="D" type="range" min="0" value="0.1" step="0.05" max="1">
+        <output name="D" style="color: blue"></output>
         <span>Max Velocity</span>
-        <div class="mdc-slider velocity-selector mdc-slider--discrete" tabindex="0" role="slider"
-             aria-valuemin="0.5" aria-valuemax="10" aria-valuenow="5" data-step="0.5"
-             aria-label="Select Velocity Value"
-        >
-            <div class="mdc-slider__track-container" style="background: white">
-                <div class="mdc-slider__track" style="background: white"></div>
-            </div>
-            <div class="mdc-slider__thumb-container">
-                <div class="mdc-slider__pin" style="background: black">
-                    <span class="mdc-slider__pin-value-marker" style="color: white;"></span>
-                </div>
-                <svg class="mdc-slider__thumb" width="21" height="21">
-                    <circle cx="10.5" cy="10.5" r="7.875" fill="gray" stroke="gray"></circle>
-                </svg>
-            </div>
-        </div>
+        <input name="velocity" type="range" min="0" value="5" step="0.5" max="10">
+        <output name="velocity"></output>
         <span>Max Turn Radius</span>
-        <div class="mdc-slider turn-radius-selector mdc-slider--discrete" tabindex="0" role="slider"
-             aria-valuemin="5" aria-valuemax="180" aria-valuenow="45" data-step="5"
-             aria-label="Select Turn Radius Value"
-        >
-            <div class="mdc-slider__track-container" style="background: white">
-                <div class="mdc-slider__track" style="background: white"></div>
-            </div>
-            <div class="mdc-slider__thumb-container">
-                <div class="mdc-slider__pin" style="background: black">
-                    <span class="mdc-slider__pin-value-marker" style="color: white;"></span>
-                </div>
-                <svg class="mdc-slider__thumb" width="21" height="21">
-                    <circle cx="10.5" cy="10.5" r="7.875" fill="gray" stroke="gray"></circle>
-                </svg>
-            </div>
-        </div>
+        <input name="turn-radius" type="range" min="0" value="45" step="5" max="180">
+        <output name="turn-radius"></output>
     </div>
     <script src="demo.js"></script>
 </body>

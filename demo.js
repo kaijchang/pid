@@ -1,14 +1,16 @@
-// patch material slider to allow float step in discrete sliders
-mdc.slider.MDCSliderFoundation.prototype.setStep = function(t){if(t<0)throw new Error("Step cannot be set to a negative number");this.isDiscrete_&&("number"!=typeof t)&&(t=1),this.step_=t,this.setValue_(this.value_,!1,!0),this.setupTrackMarker()};
+const pSlider = document.querySelector('input[name=P]');
+const iSlider = document.querySelector('input[name=I]');
+const dSlider = document.querySelector('input[name=D]');
 
-let vehicle;
+const velocitySlider = document.querySelector('input[name=velocity]');
+const turnRadiusSlider = document.querySelector('input[name=turn-radius]');
 
-const pSlider = new mdc.slider.MDCSlider(document.querySelector('.p-selector'));
-const iSlider = new mdc.slider.MDCSlider(document.querySelector('.i-selector'));
-const dSlider = new mdc.slider.MDCSlider(document.querySelector('.d-selector'));
+const pOutput = document.querySelector('output[name=P]');
+const iOutput = document.querySelector('output[name=I]');
+const dOutput = document.querySelector('output[name=D]');
 
-const velocitySlider = new mdc.slider.MDCSlider(document.querySelector('.velocity-selector'));
-const turnRadiusSlider = new mdc.slider.MDCSlider(document.querySelector('.turn-radius-selector'));
+const velocityOutput = document.querySelector('output[name=velocity]');
+const turnRadiusOutput = document.querySelector('output[name=turn-radius]');
 
 function PIDVehicle(pos, velocity, size, maxVelocity, turnRadius) {
     this.pid = new PID();
@@ -39,10 +41,10 @@ function PIDVehicle(pos, velocity, size, maxVelocity, turnRadius) {
             this.pos.x = mouseX;
             this.pos.y = mouseY;
         } else {
-            this.maxVelocity = velocitySlider.value;
-            this.turnRadius = turnRadiusSlider.value;
+            this.maxVelocity = +velocitySlider.value;
+            this.turnRadius = +turnRadiusSlider.value;
 
-            this.pid.updateGains(pSlider.value, iSlider.value, dSlider.value);
+            this.pid.updateGains(+pSlider.value, +iSlider.value, +dSlider.value);
 
             const error = height / 2 - this.pos.y;
 
@@ -110,8 +112,16 @@ function draw() {
     background(0);
     stroke(255);
     line(0, height / 2, width, height / 2);
+
     vehicle.update();
     vehicle.draw();
+
+    pOutput.textContent = pSlider.value;
+    iOutput.textContent = iSlider.value;
+    dOutput.textContent = dSlider.value;
+
+    velocityOutput.textContent = velocitySlider.value;
+    turnRadiusOutput.textContent = turnRadiusSlider.value;
 }
 
 function windowResized() {

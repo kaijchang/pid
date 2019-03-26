@@ -27,17 +27,17 @@ velocityOutput.text(velocitySlider.attr('value'));
 turnRadiusOutput.text(turnRadiusSlider.attr('value'));
 
 pSlider.on('input', event => {
-    vehicle.pid.updateGains(+$(event.target).val(), vehicle.pid.I, vehicle.pid.D);
+    vehicle.pid.updateGains(+$(event.target).val(), vehicle.pid.kI, vehicle.pid.kD);
     pOutput.text($(event.target).val());
 });
 
 iSlider.on('input', event => {
-    vehicle.pid.updateGains(vehicle.pid.P, +$(event.target).val(), vehicle.pid.D);
+    vehicle.pid.updateGains(vehicle.pid.kP, +$(event.target).val(), vehicle.pid.kD);
     iOutput.text($(event.target).val());
 });
 
 dSlider.on('input', event => {
-    vehicle.pid.updateGains(vehicle.pid.P, vehicle.pid.I, +$(event.target).val());
+    vehicle.pid.updateGains(vehicle.pid.kP, vehicle.pid.kI, +$(event.target).val());
     dOutput.text($(event.target).val());
 });
 
